@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>war</packaging>
+
+  <groupId>net.iogilab</groupId>
+  <artifactId>webapp</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <parent>
+    <groupId>net.iogilab</groupId>
+    <artifactId>example3</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <version>1.0-SNAPSHOT</version>
+      <groupId>net.iogilab</groupId>
+      <artifactId>appengine-java11-servlet</artifactId>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.1</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

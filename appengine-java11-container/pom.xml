@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+
+  <groupId>net.iogilab</groupId>
+  <artifactId>appengine-java11-container</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <description><![CDATA[
+  ServletContainer for AppEngine Java11 with Jetty11 + Servlet5.0 + JSP 3.0 + JSTL1.2(as known as 2.0, 2.0 means JSTL1.2 on JSP 3.0)
+
+  - goals 
+  * package :
+  実行用の jar ファイルを作成する
+  
+  * verify :
+  実行用の jarが必要とする依存関係のjarを appengine-staging ディレクトリにコピーする
+  ]]>
+
+  </description>
+
+  <parent>
+    <groupId>net.iogilab</groupId>
+    <artifactId>example3</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <org.junit.jupiter.version>5.7.0</org.junit.jupiter.version>
+    <org.eclipse.jetty.version>11.0.0</org.eclipse.jetty.version>
+    <!-- <org.eclipse.jetty.version>9.4.36.v20210114</org.eclipse.jetty.version> -->
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+  </properties>
+
+  <dependencies>
+    <!-- 組み込み用 Jetty 本体 -->
+    
+    <!-- Embedded Jetty dependencies -->
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
+      <version>${org.eclipse.jetty.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-webapp</artifactId>
+      <version>${org.eclipse.jetty.version}</version>
+      <type>jar</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlet</artifactId>
+      <version>${org.eclipse.jetty.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>${org.eclipse.jetty.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-annotations</artifactId>
+      <version>${org.eclipse.jetty.version}</version>
+      <type>jar</type>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14 -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>2.0.0-alpha1</version>
+    </dependency>
+    
+    <!-- 
+         これが 正規の javax.servlet-api なのだけれども、これをリパッケージしたものが
+         <groupId>org.eclipse.jetty.toolchain</groupId>
+         <artifactId>jetty-jakarta-servlet-api</artifactId>
+         に含まれる
+    -->
+    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <!--
+        <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+        <scope>provided</scope>
+        </dependency>
+    -->
+    
+    <!-- 
+         これが 正規の javax.servlet.jsp の API なのだけれども、これをリパッケージしたものが
+         <groupId>org.eclipse.jetty.toolchain</groupId>
+         <artifactId>jetty-jakarta-servlet-api</artifactId>
+         <version>5.0.2</version>
+         に含まれる。
+    -->
+    <!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
+    <!--
+    <dependency>
+      <groupId>jakarta.servlet.jsp</groupId>
+      <artifactId>jakarta.servlet.jsp-api</artifactId>
+      <version>3.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    -->
+
+    <!-- これは、本体パッケージの依存関係の中に入っている servlet-api の部分 -->
+    <!-- https://mvnrepository.com/artifact/org.eclipse.jetty.toolchain/jetty-jakarta-servlet-api -->
+    <!-- jsp 2.0,2.1,2.2,2.3,3.0 
+         jspxml 2.0 -->
+    <!--
+    <dependency>
+      <groupId>org.eclipse.jetty.toolchain</groupId>
+      <artifactId>jetty-jakarta-servlet-api</artifactId>
+      <version>5.0.2</version>
+    </dependency>
+    -->
+    
+    <!-- jetty の JSP 実装を apache-jsp に任せる -->
+    <!-- extra explicit dependency needed because there is a JSP in the sample-->
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>apache-jsp</artifactId>
+      <version>${org.eclipse.jetty.version}</version>
+    </dependency>
+
+    <!-- javax. から、 jakarta に名前空間が変わったので、JSTL に関しては、Servlet5.0/JSP 3.0 以後はこちらを使う -->
+    <!-- これは JSTL の API jarパッケージ -->
+    <!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
+    <dependency>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
+    <!-- これは JSTL の implementation jar パッケージ -->
+    <!-- https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+
+    <!--
+        Test用
+    -->
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${org.junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${org.junit.jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+  
+  <build>
+    <plugins>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.7.0</version>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <compilerArgs>
+            <arg>-Xlint:deprecation,unchecked</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+    
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+        <configuration>
+          <additionalClasspathElements>
+            <additionalClasspathElement>src/test/java</additionalClasspathElement>
+          </additionalClasspathElements>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <archive>
+            <!-- <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile> -->
+          </archive>
+          <outputDirectory>${project.build.directory}/appengine-staging</outputDirectory>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeScope>runtime</includeScope>
+              <outputDirectory>${project.build.directory}/appengine-staging</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
