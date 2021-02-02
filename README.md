@@ -73,7 +73,6 @@ webapp や、servlet の実装に関してはこれまで通りベアな servlet
 
 ### 概要
 
-組み込み用Jettyを使っているので、メインバージョンの変更によって、互換性が失われるのは仕方がないことである。
 主な変更点は ClassList の部分であるが、これは本体に吸収されているので削除された。
 
 他方 (JSTLを、コンテナにもたせるために必要な）コンテナのTLDファイルの読み込みが必要なファイルの正規表現パターンである、 org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern には、
@@ -88,7 +87,8 @@ webapp や、servlet の実装に関してはこれまで通りベアな servlet
     </dependency>
 ```
 を dependencies に加えて、利用するようにした。これ自体は、JSTL 1.2 の実装を Servlet5.0 ,JSP 3.0 上で動作するようにしたもののようである。
-なお、この変更は、JSTL 1.2 に関する内容であるので、JSPファイルの taglib uri属性の変更は不要である。（はず）
+なお、この変更を行ってglassfish の jakarta.servlet.jsp.jstl 2.0を使用するようにしても、当該の実装そのものは JSTL 1.2 であるので、
+JSPファイルの taglib uri属性の変更は不要である。（はず）
 
 ### デバッグ（ローカル実行）環境での停止問題
 デバッグ環境で停止させるため`Ctrl-C` SIGINT で割り込みをかけると、即時サーバが停止されて tmpディレクトリに、warファイルの展開とjspファイルのコンパイルのための一時ファイルがのこってしまう。
