@@ -6,8 +6,13 @@ Google App Engine - Java 11 スタンダード環境は、それまでの Java 8
 [移行のためのドキュメント](https://cloud.google.com/appengine/docs/standard/java11/java-differences)
 が公開されている。
 
-2021年1月現在のJetty最新バージョン系列Jetty 11である。しかしながら、当該のドキュメントは、Jetty 9を利用した方法であるので
-Jetty 11系列を使用した、環境を構築したい。
+[当該のドキュメント](https://cloud.google.com/appengine/docs/standard/java11/java-differences)は、Jetty 9を利用した方法であるが
+2021年1月現在においてJettyの最新バージョン系列はJetty 11である。そこでJetty 11系列を使用した環境を構築したい。
+
+```
+Java 8 環境からの移行は、APIのパッケージ名変更があったため(javax.servletからjakarta.servletへ）Jetty 9 の利用が適切である。
+ここでは、それでもJetty 11を使いたいというモチベーションを前提にする。
+```
 
 ## 問題点
 - Servlet,JSP API のパッケージ名の変更
@@ -69,6 +74,9 @@ JSTL の 実装は
 
 webapp や、servlet の実装に関してはこれまで通りベアな servlet-api , jsp-api を provide で使用すればよい。
 ただし、package名が、jakarta.servletに変更になっているのは注意が必要である。
+
+- 組み込みの AppEngine の機能が使えない
+AppEngine 組み込みとして用意されていた機能が削除されている。代替のGoogle Cloud APIの利用が提案されている。
 
 ## [App.java](https://github.com/maildrop/laughing-engine/blob/main/appengine-java11-container/src/main/java/net/iogilab/appengine11/App.java)
 
