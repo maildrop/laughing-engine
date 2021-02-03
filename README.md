@@ -91,7 +91,7 @@ AppEngine 組み込みとして用意されていた機能が削除されてい�
  これは何を言っているかというと、まずコンテナのクラスローダーとwebappのクラスローダは分離されている。
 コンテナのクラスローダーは、起動中にコンテナのTLDファイルが含まれうるjarファイルを検索してロードするという
 プロセスが含まれている。
-そして、それを制御するプロパティ```org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern```が存在するのだが、
+そして、それを制御するプロパティ org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern が存在するのだが、
 単一のjarファイルにまとめてしまうと、このコンテナのTLDファイルが含まれるjarファイルを見つけることができなくなる。
 ```
 
@@ -112,7 +112,9 @@ Embeded Jetty 11 を以下のコンポーネントを利用して、動作させ
 他方 (JSTLを、コンテナにもたせるために必要な）コンテナのTLDファイルの読み込みが必要なファイルの正規表現パターンである、
 ```org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern``` には、
 ```".*/jetty-jakarta-servlet-api-[^/]*\\.jar|.*/jakarta.servlet.jsp.jstl-[^/]*\\.jar"``` を指定している。
-この変数 Jetty のドキュメントではデフォルト値があるように書かれているが、Embeded Jetty では、そのようなデフォルト値はどうも設定されていない模様である。
+この変数 [Jetty のドキュメント](http://www.eclipse.org/jetty/documentation/jetty-11/programming_guide.php)
+（のContainer Classpath vs WebApp Classpathのところ）
+ではデフォルト値があるように書かれているが、Embeded Jetty では、そのようなデフォルト値はどうも設定されていない模様である。
 また、JSP 3.0 への移行に当たって apache taglibs 1.2 は、javax.servlet の参照を持っているために動作しない。今回は glassfish の実装である
 ```
     <dependency>
