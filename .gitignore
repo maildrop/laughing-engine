@@ -1,5 +1,9 @@
-﻿**/*~
+﻿# ignore emacs backup file and recovery file.
+# **/.\#*
+**/*~
+
 **/*.class
 **/*.jar
 **/*.war
+
 */target/**/*
