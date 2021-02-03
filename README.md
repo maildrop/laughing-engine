@@ -6,8 +6,10 @@ Google App Engine - Java 11 スタンダード環境は、それまでの Java 8
 [移行のためのドキュメント](https://cloud.google.com/appengine/docs/standard/java11/java-differences)
 が公開されている。
 
-[当該のドキュメント](https://cloud.google.com/appengine/docs/standard/java11/java-differences)は、Jetty 9を利用した方法であるが
+[当該のドキュメント](https://cloud.google.com/appengine/docs/standard/java11/java-differences)は、Embeded Jetty 9を利用した方法であるが
 2021年1月現在においてJettyの最新バージョン系列はJetty 11である。そこでJetty 11系列を使用した環境を構築したい。
+
+Embeded Jetty : 組み込み型 Jetty 完全なJettyでは無くて、Jettyのコンポーネントを使って作った特別なサーブレットコンテナ
 
 ```
 Java 8 環境からの移行は、APIのパッケージ名変更があったため(javax.servletからjakarta.servletへ）Jetty 9 の利用が適切である。
@@ -97,6 +99,13 @@ AppEngine 組み込みとして用意されていた機能が削除されてい�
 
 このクラスは、AppEngine Java 11 Standard Envrionment で、webappの コンテナであるJettyを起動するためにある。
 
+Embeded Jetty 11 を以下のコンポーネントを利用して、動作させる。
+
+- コンテナ自体の動作 Jetty 11 （ Socket を accept したりとかそういうサーバ部分 ）
+- Servlet jetty-servlet ( org.eclipse.jetty の jetty-servlet (含む Servlet 5.0) )
+- JSP apache-jsp ( org.eclipse.jetty の apache-jsp (JSP 3.0 ))
+- JSTL API ( jakarta.servlet.jsp.jstl の jakrta.servlet.jsp.jstl-api (JSTL 1.2) )
+- JSTL implment ( org.glassfish.web の jakarta.servlet.jsp.jstl (JSTL 1.2 on JSP 3.0))
 
 主な変更点は ClassList の部分であるが、これは本体に吸収されているので削除された。
 
@@ -120,7 +129,3 @@ JSPファイルの taglib uri属性の変更は不要である。（はず）
 デバッグ環境で停止させるため`Ctrl-C` SIGINT で割り込みをかけると、即時サーバが停止されて tmpディレクトリに、warファイルの展開とjspファイルのコンパイルのための一時ファイルがのこってしまう。
 このために、java.lang.Runtime#addShutdownHook() で、server.stop() を呼びだして、サーバが停止するのを join() で待機するようにコードを追加した。
 この変更で、デバッグ環境を Ctrl-C で停止させても、一時ディレクトリに置かれたファイルのクリーンアップがなされる。
-
-
-
-
