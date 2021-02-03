@@ -1,1 +1,2 @@
 ﻿runtime: java11
+entrypoint: 'java -cp "*" net.iogilab.appengine11.App webapp-1.0-SNAPSHOT.war'
