@@ -19,7 +19,8 @@ glassfish の実装バージョン番号が 2.0 になっているため）
 
 - Google の custom-entrypoint の コードが Jetty 9 用であり、 Jetty 11ではコンパイルが出来ない。
 
-組み込み用Jetty なので、バージョンによる非互換性の部分
+これは組み込み用Jetty なので、バージョンによる非互換性の部分なので、entry pointを作成した。
+
 [App.java](https://github.com/maildrop/laughing-engine/blob/main/appengine-java11-container/src/main/java/net/iogilab/appengine11/App.java) を作成したので、そちらを確認。
 
 ## maven の pom.xml の依存環境に関する調査
@@ -71,11 +72,28 @@ webapp や、servlet の実装に関してはこれまで通りベアな servlet
 
 ## [App.java](https://github.com/maildrop/laughing-engine/blob/main/appengine-java11-container/src/main/java/net/iogilab/appengine11/App.java)
 
+### 注意
+ こちらのエントリポイントに関しては、単一のjarファイルにまとめたくなるがTLDの読み込みがjarファイルを対象にしているために、
+一つにまとめることができない。これに関しては、要調査の段階である。
+（ファイル jetty-jakarta-servlet-api*.jar と jakarta.servlet.jsp.jstl-*.jar ```org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern``` に書かれるファイル群）
+
+```
+ これは何を言っているかというと、まずコンテナのクラスローダーとwebappのクラスローダは分離されている。
+コンテナのクラスローダーは、起動中にコンテナのTLDファイルが含まれうるjarファイルを検索してロードするという
+プロセスが含まれている。
+そして、それを制御するプロパティ```org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern```が存在するのだが、
+単一のjarファイルにまとめてしまうと、このコンテナのTLDファイルが含まれるjarファイルを見つけることができなくなる。
+```
+
 ### 概要
+
+このクラスは、AppEngine Java 11 Standard Envrionment で、webappの コンテナであるJettyを起動するためにある。
+
 
 主な変更点は ClassList の部分であるが、これは本体に吸収されているので削除された。
 
-他方 (JSTLを、コンテナにもたせるために必要な）コンテナのTLDファイルの読み込みが必要なファイルの正規表現パターンである、 org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern には、
+他方 (JSTLを、コンテナにもたせるために必要な）コンテナのTLDファイルの読み込みが必要なファイルの正規表現パターンである、
+```org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern``` には、
 ```".*/jetty-jakarta-servlet-api-[^/]*\\.jar|.*/jakarta.servlet.jsp.jstl-[^/]*\\.jar"``` を指定している。
 この変数 Jetty のドキュメントではデフォルト値があるように書かれているが、Embeded Jetty では、そのようなデフォルト値はどうも設定されていない模様である。
 また、JSP 3.0 への移行に当たって apache taglibs 1.2 は、javax.servlet の参照を持っているために動作しない。今回は glassfish の実装である
@@ -94,6 +112,7 @@ JSPファイルの taglib uri属性の変更は不要である。（はず）
 デバッグ環境で停止させるため`Ctrl-C` SIGINT で割り込みをかけると、即時サーバが停止されて tmpディレクトリに、warファイルの展開とjspファイルのコンパイルのための一時ファイルがのこってしまう。
 このために、java.lang.Runtime#addShutdownHook() で、server.stop() を呼びだして、サーバが停止するのを join() で待機するようにコードを追加した。
 この変更で、デバッグ環境を Ctrl-C で停止させても、一時ディレクトリに置かれたファイルのクリーンアップがなされる。
+
 
 
 
