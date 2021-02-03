@@ -13,7 +13,9 @@ Java11 はこのコンテナの部分もユーザが準備することにしコ�
 2021年1月現在において[Eclipse Jetty](https://www.eclipse.org/jetty/)(以下Jettyと呼ぶ)の最新バージョン系列はJetty 11である。
 そこでJetty 11系列を使用した環境を構築したい。
 
-Embeded Jetty : 組み込み型 Jetty 完全なJettyでは無くて、Jettyのコンポーネントを使って作った特別なサーブレットコンテナ
+- Embeded Jetty
+
+組み込み型 Jetty のことで、Jettyのコンポーネントを使って作った特別なサーブレットコンテナ
 
 ```
 Java 8 環境からの移行は、APIのパッケージ名変更があったため(javax.servletからjakarta.servletへ）Jetty 9 の利用が適切である。
