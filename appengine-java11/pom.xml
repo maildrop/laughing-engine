@@ -67,7 +67,8 @@
         <artifactId>appengine-maven-plugin</artifactId>
         <version>2.2.0</version>
         <configuration>
-          <projectId>your-project-ID-goes-here</projectId>
+          <!-- <projectId>your-project-ID-goes-here</projectId> -->
+          <projectId>elite-firefly-302904</projectId>
           <version>1</version>
         </configuration>
       </plugin>
