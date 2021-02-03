@@ -2,12 +2,16 @@
 Example of Jetty 11 on google AppEngine Java11 environment with Servlet5.0 JSP3.0 JSTL1.2 
 
 # はじめに
-Google App Engine - Java 11 スタンダード環境は、それまでの Java 8 ランタイムとは異なった仕組みで動作するようになり、
+Google AppEngine - Java 11 スタンダード環境は、それまでの Java 8 ランタイムとは異なった仕組みで動作するようになり、
 [移行のためのドキュメント](https://cloud.google.com/appengine/docs/standard/java11/java-differences)
 が公開されている。
 
+元々 Google AppEngine では、[Eclipse Jetty](https://www.eclipse.org/jetty/)をコンテナに採用していてコンテナ部分は、AppEngineが提供していた。
+Java11 はこのコンテナの部分もユーザが準備することにしコンテナ選択の自由度が増した。このコンテナを起動する部分をentrypointと呼ぶ。
+
 [当該のドキュメント](https://cloud.google.com/appengine/docs/standard/java11/java-differences)は、Embeded Jetty 9を利用した方法であるが
-2021年1月現在においてJettyの最新バージョン系列はJetty 11である。そこでJetty 11系列を使用した環境を構築したい。
+2021年1月現在において[Eclipse Jetty](https://www.eclipse.org/jetty/)(以下Jettyと呼ぶ)の最新バージョン系列はJetty 11である。
+そこでJetty 11系列を使用した環境を構築したい。
 
 Embeded Jetty : 組み込み型 Jetty 完全なJettyでは無くて、Jettyのコンポーネントを使って作った特別なサーブレットコンテナ
 
