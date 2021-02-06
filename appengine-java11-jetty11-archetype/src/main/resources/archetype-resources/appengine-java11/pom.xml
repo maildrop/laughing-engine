@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <groupId>net.iogilab</groupId>
-  <artifactId>appengine-java11</artifactId>
+
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
 
   <parent>
-    <groupId>net.iogilab</groupId>
-    <artifactId>example3</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>${groupId}</groupId>
+    <artifactId>${rootArtifactId}</artifactId>
+    <version>${version}</version>
   </parent>
 
   <properties>
@@ -21,15 +22,15 @@
   
   <dependencies>
     <dependency>
-      <groupId>net.iogilab</groupId>
+      <groupId>${groupId}</groupId>
       <artifactId>appengine-java11-container</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${version}</version>
     </dependency>
 
     <dependency>
-      <groupId>net.iogilab</groupId>
+      <groupId>${groupId}</groupId>
       <artifactId>webapp</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>${version}</version>
       <type>war</type>
     </dependency>
   </dependencies>
@@ -62,14 +63,12 @@
         </executions>
       </plugin>
 
-
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
         <version>2.2.0</version>
         <configuration>
-          <!-- <projectId>your-project-ID-goes-here</projectId> -->
-          <projectId>elite-firefly-302904</projectId>
+          <projectId>your-project-ID-goes-here</projectId>
           <version>1</version>
         </configuration>
       </plugin>

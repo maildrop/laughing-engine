@@ -1,4 +1,4 @@
-package net.iogilab.appengine11;
+package $package;
 /*
  * Copyright 2019 Google LLC
  *
@@ -111,7 +111,7 @@ public final class App{
 
         /*
           Ctrl-C で SIGINT がおきて、サーバが終了使用とするときに、 Runtime() の shutdownHook が呼ばれる
-          @see https://docs.oracle.com/javase/jp/7/api/java/lang/Runtime.html#addShutdownHook(java.lang.Thread)
+          @see https://docs.oracle.com/javase/jp/7/api/java/lang/Runtime.html#addShutdownHook(Thread)
 
           このシャットダウンフックで、server.stop() を呼び出さないと、
           一時ディレクトリのクリーンアップルーチンが呼ばれずそのまま残る事になる。

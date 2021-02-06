@@ -3,9 +3,15 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>jar</packaging>
 
-  <groupId>net.iogilab</groupId>
-  <artifactId>appengine-java11-container</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
+
+  <parent>
+    <groupId>${groupId}</groupId>
+    <artifactId>${rootArtifactId}</artifactId>
+    <version>${version}</version>
+  </parent>
 
   <description><![CDATA[
   ServletContainer for AppEngine Java11 with Jetty11 + Servlet5.0 + JSP 3.0 + JSTL1.2(as known as 2.0, 2.0 means JSTL1.2 on JSP 3.0)
@@ -19,12 +25,6 @@
   ]]>
 
   </description>
-
-  <parent>
-    <groupId>net.iogilab</groupId>
-    <artifactId>example3</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
