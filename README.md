@@ -40,8 +40,13 @@ Java 8 環境からの移行は、APIのパッケージ名変更があったた�
 |appengine-java11-container | embeded Jetty 本体 AppEngine の custom-entrypoint を指定して使う |
 |appengine-java11-servlet   | Servlet の実装コード プロジェクト |
 |webapp                     | WebApp として、warファイルを作るプロジェクト appengine-java11-servlet に依存している |
-|appengine-java11           |appengineにdeploy することを目的としたプロジェクト appengine-java11-container と webapp に依存している |
+|appengine-java11           | appengineにdeploy することを目的としたプロジェクト appengine-java11-container と webapp に依存している |
 
+### そのほか
+|ディレクトリ| 内容|
+|---------------------------|------------------------------------------------------------|
+|documents                  | ドキュメント類 |
+|appengine-java11-jetty11-archetype| mvn archetype:generate 用のプロジェクト |
 
 ## 問題点
 - Servlet,JSP API のパッケージ名の変更
