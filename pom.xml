@@ -7,6 +7,34 @@
   <artifactId>example3</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+  <dependencies>
+      <dependency>
+        <groupId>org.apache.maven.shared</groupId>
+        <artifactId>file-management</artifactId>
+        <version>3.0.0</version>
+      </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- 
+           ダメ 使い物にならない 
+           Ctrl-C(SIGINT)時に、tmpディレクトリのクリーンアップが動作しない。問題外
+      -->
+      <!--
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <executable>java</executable>
+          <commandlineArgs>-cp appengine-java11/target/appengine-staging/* net.iogilab.appengine11.App appengine-java11/target/appengine-staging/webapp-1.0-SNAPSHOT.war</commandlineArgs>
+        </configuration>
+      </plugin>
+      -->
+    </plugins>
+  </build>
+  
   <modules>
     <module>appengine-java11-container</module>
     <module>appengine-java11-servlet</module>
