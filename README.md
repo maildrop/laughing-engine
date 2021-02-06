@@ -21,6 +21,17 @@ Java11 はこのコンテナの部分もユーザが準備することにしコ�
 Java 8 環境からの移行は、APIのパッケージ名変更があったため(javax.servletからjakarta.servletへ）Jetty 9 の利用が適切である。
 ここでは、それでもJetty 11を使いたいというモチベーションを前提にする。
 ```
+## 出来たこと
+- mvn package で appengine-staging がつくられるところまではできた。
+- 実際に deploy して、JSP・JSTL の実行確認 [appengineのサイト](https://elite-firefly-302904.an.r.appspot.com/)
+
+## 出来ていないこと
+- トップディレクトリの mvn からの各種操作 (トップディレクトリから、mvn package 後 appengine-java11 で mvn appengine:deploy は出来る。)
+
+##現在作業中の内容
+- maven archetype でのひな形作成
+
+ これは、[appengine-java11-jetty11-archetype](https://github.com/maildrop/laughing-engine/tree/main/appengine-java11-jetty11-archetype)で実装中
 
 ## 収容物
 - appengine-java11-container
@@ -154,3 +165,4 @@ JSPファイルの taglib uri属性の変更は不要である。（はず）
 デバッグ環境で停止させるため`Ctrl-C` SIGINT で割り込みをかけると、即時サーバが停止されて tmpディレクトリに、warファイルの展開とjspファイルのコンパイルのための一時ファイルがのこってしまう。
 このために、java.lang.Runtime#addShutdownHook() で、server.stop() を呼びだして、サーバが停止するのを join() で待機するようにコードを追加した。
 この変更で、デバッグ環境を Ctrl-C で停止させても、一時ディレクトリに置かれたファイルのクリーンアップがなされる。
+
