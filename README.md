@@ -28,27 +28,20 @@ Java 8 環境からの移行は、APIのパッケージ名変更があったた�
 ## 出来ていないこと
 - トップディレクトリの mvn からの各種操作 (トップディレクトリから、mvn package 後 appengine-java11 で mvn appengine:deploy は出来る。)
 
-##現在作業中の内容
+## 現在作業中の内容
 - maven archetype でのひな形作成
 
  これは、[appengine-java11-jetty11-archetype](https://github.com/maildrop/laughing-engine/tree/main/appengine-java11-jetty11-archetype)で実装中
 
 ## 収容物
-- appengine-java11-container
 
-embeded Jetty 本体 AppEngine の custom-entrypoint を指定して使う
+|ディレクトリ| 内容|
+|---------------------------|------------------------------------------------------------|
+|appengine-java11-container | embeded Jetty 本体 AppEngine の custom-entrypoint を指定して使う |
+|appengine-java11-servlet   | Servlet の実装コード プロジェクト |
+|webapp                     | WebApp として、warファイルを作るプロジェクト appengine-java11-servlet に依存している |
+|appengine-java11           |appengineにdeploy することを目的としたプロジェクト appengine-java11-container と webapp に依存している |
 
-- appengine-java11-servlet
-
-Servlet の実装コード プロジェクト
-
-- webapp
-
-WebApp として、warファイルを作るプロジェクト appengine-java11-servlet に依存している
-
-- appengine-java11
-
-appengineにdeploy することを目的としたプロジェクト appengine-java11-container と webapp に依存している 
 
 ## 問題点
 - Servlet,JSP API のパッケージ名の変更
