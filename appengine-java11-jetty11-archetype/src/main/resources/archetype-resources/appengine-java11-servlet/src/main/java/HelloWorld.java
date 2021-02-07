@@ -1,4 +1,4 @@
-package net.iogilab;
+package ${package};
 
 import java.lang.*;
 import java.util.logging.Logger;
