@@ -32,46 +32,57 @@ under the License.
     <fileSet filtered="true" packaged="true">
       <directory>src/test/java</directory>
     </fileSet>
-
-    <fileSet filtered="true" packaged="true">
-      <directory>appengine-java11/src/main/java</directory>
-    </fileSet>
-
-    <fileSet filtered="true" packaged="true">
-      <directory>appengine-java11-container/src/main/java</directory>
-    </fileSet>
-
-    <fileSet filtered="true" packaged="true">
-      <directory>appengine-java11-servlet/src/main/java</directory>
-    </fileSet>
-
-    <fileSet filtered="true" packaged="false">
-      <directory>webapp/src/main/webapp</directory>
-    </fileSet>
-    
   </fileSets>
 
   <modules>
     <module id="appengine-java11" dir="appengine-java11" name="appengine-java11">
-      <fileSet filtered="true" packaged="true">
-        <directory>appengine-java11</directory>
-      </fileSet>
+      <fileSets>
+        <fileSet filtered="true" packaged="false">
+          <directory>src/main/appengine</directory>
+        </fileSet>
+      </fileSets>
     </module>
     <module id="appengine-java11-container" dir="appengine-java11-container" name="appengine-java11-container">
-      <fileSet filtered="true" packaged="true">
-        <directory>appengine-java11-container</directory>
-      </fileSet>
+      <fileSets>
+        <fileSet filtered="true" packaged="true">
+          <directory>src/main/java</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+          <directory>src/main/resources</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+          <directory>src/test/java</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+          <directory>src/test/resources</directory>
+        </fileSet>
+      </fileSets>
     </module>
     <module id="appengine-java11-servlet" dir="appengine-java11-servlet" name="appengine-java11-servlet">
-      <fileSet filtered="true" packaged="true">
-        <directory>appengine-java11-servlet</directory>
-      </fileSet>
+      <fileSets>
+        <fileSet filtered="true" packaged="true">
+          <directory>src/main/java</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+          <directory>src/main/resources</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+          <directory>src/test/java</directory>
+        </fileSet>
+        <fileSet filtered="true" packaged="true">
+          <directory>src/test/resources</directory>
+        </fileSet>
+      </fileSets>
     </module>
+
     <module id="webapp" dir="webapp" name="webapp">
-      <fileSet filtered="true" packaged="true">
-        <directory>webapp/src</directory>
-      </fileSet>
+      <fileSets>
+        <fileSet filtered="true" packaged="false">
+          <directory>src/main/webapp</directory>
+        </fileSet>
+      </fileSets>
     </module>
+    
   </modules>
             
 </archetype-descriptor>
