@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -35,6 +34,7 @@ under the License.
   </fileSets>
 
   <modules>
+    <!-- module for deploying Google App Engine -->
     <module id="appengine-java11" dir="appengine-java11" name="appengine-java11">
       <fileSets>
         <fileSet filtered="true" packaged="false">
@@ -42,6 +42,7 @@ under the License.
         </fileSet>
       </fileSets>
     </module>
+    <!-- module for executing on Google AppEngine Java11 Standard environment with Jetty 11 embbeded version -->
     <module id="appengine-java11-container" dir="appengine-java11-container" name="appengine-java11-container">
       <fileSets>
         <fileSet filtered="true" packaged="true">
@@ -58,6 +59,8 @@ under the License.
         </fileSet>
       </fileSets>
     </module>
+
+    <!-- module for Servlet jar file for webapp -->
     <module id="appengine-java11-servlet" dir="appengine-java11-servlet" name="appengine-java11-servlet">
       <fileSets>
         <fileSet filtered="true" packaged="true">
@@ -75,6 +78,7 @@ under the License.
       </fileSets>
     </module>
 
+    <!-- module that provide webapp war package -->
     <module id="webapp" dir="webapp" name="webapp">
       <fileSets>
         <fileSet filtered="true" packaged="false">
