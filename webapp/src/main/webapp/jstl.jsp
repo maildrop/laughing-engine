@@ -3,7 +3,6 @@
          pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8"/>
@@ -11,7 +10,7 @@
     <title>hello world</title>
   </head>
   <body>
-    ${"hello world"}
+    ${"hello world"} ${fn:escapeXml('<._.>')}
     こんにちは世界
   </body>
 </html>
