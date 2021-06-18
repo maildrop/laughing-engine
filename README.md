@@ -13,6 +13,17 @@ Java11 はこのコンテナの部分もユーザが準備することにしコ�
 2021年1月現在において[Eclipse Jetty](https://www.eclipse.org/jetty/)(以下Jettyと呼ぶ)の最新バージョン系列はJetty 11である。
 そこでJetty 11系列を使用した環境を構築したい。
 
+# Test
+
+##コンパイル
+```
+> mvn package
+```
+## ローカル実行
+```
+> PORT=38080 java -cp 'appengine-java11/target/appengine-staging/*' net.iogilab.appengine11.App appengine-java11/target/appengine-staging/webapp-1.0-SNAPSHOT.war
+```
+
 - Embeded Jetty
 
 組み込み型 Jetty のことで、Jettyのコンポーネントを使って作った特別なサーブレットコンテナ
