@@ -35,6 +35,11 @@ Java 8 環境からの移行は、APIのパッケージ名変更があったた�
  環境変数PORT を指定しない場合は 8080 がデフォルト値になるようにしてあります。
  必要なjarファイルは、appengine-java11/target/appengine-staging/ にstaging されるので、-cp [...]/* でグラブ指定 最後に war パッケージを指定します。
 
+### Deploy
+
+ documents の中のファイルを参照のこと。
+ deploy だけをさせるために webapp ディレクトリがある。
+
 ## 出来たこと
 - mvn package で appengine-staging がつくられるところまではできた。
 - 実際に deploy して、JSP・JSTL の実行確認 [appengineのサイト](https://elite-firefly-302904.an.r.appspot.com/)
